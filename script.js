@@ -1,35 +1,29 @@
-//your JS code here. If required.
-
 const inputs = document.querySelectorAll(".code");
 
-// focus first input on load
+// Focus first input on load
 inputs[0].focus();
 
 inputs.forEach((input, index) => {
 
+  // Forward typing
   input.addEventListener("input", (e) => {
-    const value = e.target.value;
-
-    // allow only digits
-    if (isNaN(value)) {
+    if (isNaN(e.target.value)) {
       input.value = "";
       return;
     }
 
-    // move focus forward
-    if (value !== "" && index < inputs.length - 1) {
+    if (e.target.value && index < inputs.length - 1) {
       inputs[index + 1].focus();
     }
   });
 
+  // Backspace logic (KEY FIX)
   input.addEventListener("keydown", (e) => {
-
     if (e.key === "Backspace") {
+      input.value = "";
 
-      // if current field is empty, move back
-      if (input.value === "" && index > 0) {
+      if (index > 0) {
         inputs[index - 1].focus();
-        inputs[index - 1].value = "";
       }
     }
   });
